@@ -5,12 +5,17 @@
   <div class="main_content">
   <div class="card">
     <div class="form_content">
+      
       <form class="under_form">
         <hr className="line"></hr>
         <input v-model="formData.cardCVC" type="number" placeholder="CVC" class="cvc_input"/>
       </form> 
 
-      <form @submit.prevent="addUserData()" class="card_form">
+      <form @submit.prevent="addUserData(formData.cardHolder,
+       formData.cardNumber,
+        formData.cardMonth,
+         formData.cardYear,
+          formData.cardCVC )" class="card_form">
       
             <input v-model="formData.cardHolder" type="text" placeholder="Holder of card"/>
             <input v-model="formData.cardNumber" type="number" placeholder="Number of card"/>      
@@ -23,6 +28,15 @@
           <input type="submit" value="Send" class="submit_btn"/>
 
       </form>
+      <!-- <div>
+        <h1>{{ formData.cardHolder }}</h1>
+        <h2> {{ formData.cardNumber }}</h2>
+        <h2> {{ formData.cardMonth }}</h2>
+        <h2> {{ formData.cardYear }}</h2>
+        <h2> {{ formData.cardCVC }}</h2>
+
+        <h1>AAAAA</h1>
+    </div> -->
       <img :src="cardImg" class="card_logo"/>
 
     </div>
@@ -30,6 +44,7 @@
 
 
     <img :src="cardLogo" class="logo"/>
+    
 
   </div>
     
@@ -66,6 +81,7 @@
 <script >
 import cardLogo from "../assets/images/logo.png"
 import cardImg from "../assets/images/cardImg.png"
+import cursor from "../assets/images/cursor.png"
 
 export default {
 
@@ -73,6 +89,7 @@ export default {
     return {
       cardLogo: cardLogo,
       cardImg: cardImg,
+      cursor: cursor,
       formData:{
         cardHolder: "",//"Holder of card", 2 words
         cardNumber: null,//"Number of card", 16 num
@@ -82,7 +99,7 @@ export default {
       },
 
       usersData: [
-        {id: 1, name: 'Jane', firstName: 'Doe', cardNumber: 1234123412341234, dateExpire: 110121, code: 123},
+        {id: 1, name: 'Jane Doe', cardNumber: 1234123412341234, dateExpire: 110121, code: 123},
         // {id: 2, name: 'John', firstName: 'Doe', cardNumber: 1234123412341234, dateExpire: 110121, code: 123},
         // {id: 3, name: 'John', firstName: 'Doe', cardNumber: 1234123412341234, dateExpire: 110121, code: 123},
         // {id: 5, name: 'John', firstName: 'Doe', cardNumber: 1234123412341234, dateExpire: 110121, code: 123},
@@ -95,14 +112,13 @@ export default {
   },
 
   methods:{
-    addUserData(){
+    addUserData(name, cardNumber, cardMonth, cardYear, code){
       this.usersData.push({
         id: Date.now,
-        name: 'John', 
-        firstName: 'Doe', 
-        cardNumber: 1234123412341234, 
-        dateExpire: 110121, 
-        code: 123
+        name: name || 'John Doe', 
+        cardNumber: cardNumber ||1234123412341234, 
+        dateExpire: cardMonth+'/'+cardYear || '11/21', 
+        code: code || 123
       })
     }
 
@@ -194,6 +210,11 @@ export default {
 
   }
 
+  input:hover{
+    border: 1px solid #176FC1;
+    cursor:  url("../assets/images/cursor.png"), auto;
+  }
+
   .num_input{
     width: 63px;
     height: 25px;
@@ -240,6 +261,7 @@ export default {
     background-color: #979797;
     height: 50px;
     margin-top: 40px;
+    border: none;
   }
 
   .card_logo{
