@@ -14,7 +14,7 @@ import Form from './components/Form.vue';
 
 export default {
   components: {
-    Form
+    Form,
   },
   data(){
     return {
