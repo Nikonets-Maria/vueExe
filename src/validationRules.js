@@ -1,7 +1,8 @@
 
 import * as yup from 'yup'
 
-const today = new Date().toISOString().split('T')[0] //YYYY-MM-DD
+// const this_year = new Date().toISOString().split('T')[0] //YYYY-MM-DD // 2025-02-05
+const this_year = new Date().toISOString().split('-')[0].slice(2,4)
 
 export const validationSchema = yup.object({
 
@@ -13,23 +14,15 @@ export const validationSchema = yup.object({
     cardHolder: yup.string()
                     .required('Required')
                     ,
-    // password: yup.string()
-    //                 .required('Введите пароль')
-    //                 .matches(/\w{8,}[!@#$%^&*()]+/,'Длинна 8 символов, наличие спец символа')
-    //                 ,
-    // secondPassword: yup.string()
-    //                 .oneOf([yup.ref('password'), null], 'Пароли не совподают')
-    //                 .required('Повторите  пароль')
-    //                 ,
-    cardMonth: yup.date()
+    cardMonth: yup.number()
                     .required('Required')
-                    .max(new Date(), 'Invalid')
+                    .max(12, 'Invalid')
                     ,
-    cardYear: yup.date()
+    cardYear: yup.number()
                     .required('Required')
-                    .max(new Date(), 'Invalid')
+                    .min(this_year, 'Invalid')
                     ,
-                    cardCVC: yup.string()
+    cardCVC: yup.string()
                     .required('Required')
                     .min(3, 'Invalid')
                     .max(3, 'Invalid')
@@ -41,3 +34,12 @@ export const validationSchema = yup.object({
 // 2 - Required / Invalid card number 4-visa 5-mc - 16chain
 // mm(12) - yy(25) = Required / Invalid
 // cvs - Required(3)
+
+    // password: yup.string()
+    //                 .required('Введите пароль')
+    //                 .matches(/\w{8,}[!@#$%^&*()]+/,'Длинна 8 символов, наличие спец символа')
+    //                 ,
+    // secondPassword: yup.string()
+    //                 .oneOf([yup.ref('password'), null], 'Пароли не совподают')
+    //                 .required('Повторите  пароль')
+    //                 ,

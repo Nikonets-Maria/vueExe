@@ -4,8 +4,6 @@
   <div class="card">
     <div class="form_content">
 
-
-
       <Form :validation-schema="validationSchema" @submit="addUserData(formData.cardHolder,
        formData.cardNumber,
         formData.cardMonth,
@@ -31,9 +29,7 @@
                   <Field name="cardMonth" v-model="formData.cardMonth" type="number" placeholder="MM" class="num_input"/>
                   <ErrorMessage name="cardMonth" class="error_msg"/>
                 </div>
-
                 <p>/</p>
-
                 <div class="error_field">
                   <Field name="cardYear" v-model="formData.cardYear" type="number" placeholder="YY" class="num_input"/>
                   <ErrorMessage name="cardYear" class="error_msg"/>
@@ -295,7 +291,6 @@ export default {
   .logo{
     height: 120px;
     margin-left: 120px;
-    margin-right: -10px;
     margin-bottom: 50px;
   }
 
@@ -306,8 +301,6 @@ export default {
     border-left: 1px solid black;
     border-right: 1px solid black;
   }
-
-
   
 .table_contain{
     display: flex;
